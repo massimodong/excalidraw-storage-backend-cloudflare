@@ -1,6 +1,9 @@
-# excalidraw-store-cloudflare
+# excalidraw-storage-backend-cloudflare
 
-Use [Cloudflare Workers KV](https://developers.cloudflare.com/kv/) for Excalidraw storage, replacing [excalidraw-store](https://github.com/excalidraw/excalidraw-store).
+Use [Cloudflare Workers KV](https://developers.cloudflare.com/kv/) for Excalidraw storage, replacing [excalidraw-storage-backend](https://github.com/alswl/excalidraw-storage-backend).
+
+## Progress
+TODO
 
 ## Local Development
 
