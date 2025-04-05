@@ -1,0 +1,11 @@
+.wrangler/
+node_modules
+package-lock.json
+.dev.vars
+
+# Tencent Cloud EdgeOne
+.env
+.edgeone
+.edgeone/*
+.tef_dist/*
+  
