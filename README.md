@@ -2,9 +2,6 @@
 
 Use [Cloudflare Workers KV](https://developers.cloudflare.com/kv/) for Excalidraw storage, replacing [excalidraw-storage-backend](https://github.com/alswl/excalidraw-storage-backend).
 
-## Progress
-TODO
-
 ## Local Development
 
 First, run `npm install` to install the dependencies.

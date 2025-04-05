@@ -2,7 +2,7 @@ export async function onRequest(context) {
   const env = context.env;
   const key = context.params.key;
 
-  const data = await env.kvstore.get(key, "arrayBuffer");
+  const data = await env.kvstore.get("scenes" + key, "arrayBuffer");
 
   if(data !== null){
     return new Response(data, {

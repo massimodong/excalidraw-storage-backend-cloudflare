@@ -6,7 +6,7 @@ export async function onRequestOptions(context){
     headers: {
       "Access-Control-Allow-Origin": cors_origin,
       "Access-Control-Allow-Headers": "*",
-      "Access-Control-Allow-Methods": "GET, OPTIONS",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, OPTIONS",
       "Access-Control-Max-Age": "86400",
     },
   });

@@ -1,12 +1,38 @@
 import { nanoid } from 'nanoid';
 
-export async function onRequest(context) {
+export async function onRequestGet(context) {
+  const env = context.env;
+  const key = context.params.key;
+
+  const data = await env.kvstore.get("rooms" + key, "arrayBuffer");
+
+  if(data !== null){
+    return new Response(data, {
+      headers: {
+        'content-type': 'application/octet-stream',
+      },
+    });
+  }else{
+    const message = JSON.stringify({
+      message: "Could not find the file.",
+    }, null, 2);
+
+    return new Response(message, {
+      headers: {
+        'content-type': 'application/json; charset=UTF-8',
+      },
+      status: 404,
+    });
+  }
+}
+
+export async function onRequestPut(context) {
   const SIZE_LIMIT = 26214400; // 25MiB value size upper bound for cloudflare's kv store
   const request = context.request;
   const blob = await request.blob();
   const env = context.env;
+  const key = context.params.key;
 
-  const kv_key = nanoid();
   const kv_data = await blob.arrayBuffer();
 
   if(blob.size > SIZE_LIMIT){
@@ -24,12 +50,12 @@ export async function onRequest(context) {
 
   // store the data and return
   try {
-    await env.kvstore.put("scenes" + kv_key, kv_data); //TODO: expire time ?
+    await env.kvstore.put("rooms" + key, kv_data); //TODO: expire time ?
 
     const url = URL.parse(request.url);
 
     const ret = JSON.stringify({
-      id: kv_key,
+      id: key,
     }, null, 2);
 
     return new Response(ret, {
