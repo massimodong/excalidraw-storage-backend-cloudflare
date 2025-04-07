@@ -11,7 +11,7 @@ export async function onRequest(context) {
 
   let res = null;
 
-  const namespace = query[0];
+  const namespace = request.method === "POST" ? "scenes" : query[0];
   const keyname = request.method === "POST" ? nanoid() : query[1];
   const kv_key = namespace + keyname;
 
