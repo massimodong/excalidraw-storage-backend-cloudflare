@@ -3,8 +3,9 @@ import { nanoid } from 'nanoid';
 export async function onRequestGet(context) {
   const env = context.env;
   const key = context.params.key;
+  const namespace = context.params.namespace;
 
-  const data = await env.kvstore.get("rooms" + key, "arrayBuffer");
+  const data = await env.kvstore.get(namespace + key, "arrayBuffer");
 
   if(data !== null){
     return new Response(data, {
@@ -32,6 +33,7 @@ export async function onRequestPut(context) {
   const blob = await request.blob();
   const env = context.env;
   const key = context.params.key;
+  const namespace = context.params.namespace;
 
   const kv_data = await blob.arrayBuffer();
 
@@ -50,7 +52,7 @@ export async function onRequestPut(context) {
 
   // store the data and return
   try {
-    await env.kvstore.put("rooms" + key, kv_data); //TODO: expire time ?
+    await env.kvstore.put(namespace + key, kv_data); //TODO: expire time ?
 
     const url = URL.parse(request.url);
 
