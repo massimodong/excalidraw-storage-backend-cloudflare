@@ -5,6 +5,7 @@ export async function onRequest(context) {
   const request = context.request;
   const blob = await request.blob();
   const env = context.env;
+  const kvstore = env.kvstore || edgeonekvstore;
 
   const kv_key = nanoid();
   const kv_data = await blob.arrayBuffer();
@@ -24,7 +25,7 @@ export async function onRequest(context) {
 
   // store the data and return
   try {
-    await env.kvstore.put("scenes" + kv_key, kv_data); //TODO: expire time ?
+    await kvstore.put("scenes" + kv_key, kv_data); //TODO: expire time ?
 
     const url = URL.parse(request.url);
 

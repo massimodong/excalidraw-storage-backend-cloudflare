@@ -1,8 +1,9 @@
 export async function onRequest(context) {
   const env = context.env;
   const key = context.params.key;
+  const kvstore = env.kvstore || edgeonekvstore;
 
-  const data = await env.kvstore.get("scenes" + key, "arrayBuffer");
+  const data = await kvstore.get("scenes" + key, "arrayBuffer");
 
   if(data !== null){
     return new Response(data, {
