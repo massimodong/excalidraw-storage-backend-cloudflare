@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 
-export async function onRequest(context) {
+export async function onRequestPost(context) {
   const SIZE_LIMIT = 26214400; // 25MiB value size upper bound for cloudflare's kv store
   const request = context.request;
   const blob = await request.blob();

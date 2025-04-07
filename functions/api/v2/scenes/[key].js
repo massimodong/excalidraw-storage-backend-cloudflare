@@ -1,4 +1,4 @@
-export async function onRequest(context) {
+export async function onRequestGet(context) {
   const env = context.env;
   const key = context.params.key;
   const kvstore = env.kvstore || edgeonekvstore;

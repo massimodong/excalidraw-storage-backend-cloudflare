@@ -2,11 +2,12 @@ import { nanoid } from 'nanoid';
 
 export async function onRequestGet(context) {
   const env = context.env;
-  const key = context.params.key;
-  const namespace = context.params.namespace;
+  const key = context.params.key[0] + context.params.key[1];
   const kvstore = env.kvstore || edgeonekvstore;
 
-  const data = await kvstore.get(namespace + key, "arrayBuffer");
+  console.log(key);
+
+  const data = await kvstore.get(key, "arrayBuffer");
 
   if(data !== null){
     return new Response(data, {
@@ -33,8 +34,7 @@ export async function onRequestPut(context) {
   const request = context.request;
   const blob = await request.blob();
   const env = context.env;
-  const key = context.params.key;
-  const namespace = context.params.namespace;
+  const key = context.params.key[0] + context.params.key[1];
   const kvstore = env.kvstore || edgeonekvstore;
 
   const kv_data = await blob.arrayBuffer();
@@ -54,7 +54,7 @@ export async function onRequestPut(context) {
 
   // store the data and return
   try {
-    await kvstore.put(namespace + key, kv_data); //TODO: expire time ?
+    await kvstore.put(key, kv_data); //TODO: expire time ?
 
     const url = URL.parse(request.url);
 
