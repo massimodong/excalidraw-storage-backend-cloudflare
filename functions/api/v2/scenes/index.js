@@ -27,8 +27,6 @@ export async function onRequest(context) {
   try {
     await kvstore.put("scenes" + kv_key, kv_data); //TODO: expire time ?
 
-    const url = URL.parse(request.url);
-
     const ret = JSON.stringify({
       id: kv_key,
     }, null, 2);
