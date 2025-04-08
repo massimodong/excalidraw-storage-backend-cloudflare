@@ -83,6 +83,10 @@ export async function onRequest(context) {
       });
 
       break;
+    default:
+      res = new Response(null, {
+        status: 405,
+      });
   }
 
   const cors_origin = context.env.CORS_ALLOW_ORIGIN || "*";
